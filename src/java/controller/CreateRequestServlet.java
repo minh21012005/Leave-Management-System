@@ -21,13 +21,13 @@ public class CreateRequestServlet extends BaseRequiredAuthenticationController {
         String message = "Successful!";
         HttpSession session = req.getSession();
         session.setAttribute("message", message);
-        resp.sendRedirect("home.jsp");
+        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Employee employee) throws ServletException, IOException {
         req.setAttribute("employee", employee);
-        req.getRequestDispatcher("createRequest.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/createRequest.jsp").forward(req, resp);
     }
 
 }

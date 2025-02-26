@@ -23,6 +23,6 @@ public class ViewMyRequestServlet extends BaseRequiredAuthenticationController {
         String department = employee.getDepartment();
         req.setAttribute("department", department);
         req.setAttribute("list", list);
-        req.getRequestDispatcher("myRequest.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/myRequest.jsp").forward(req, resp);
     }
 }

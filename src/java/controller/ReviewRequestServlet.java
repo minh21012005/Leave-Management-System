@@ -22,7 +22,7 @@ public class ReviewRequestServlet extends BaseRequiredAuthenticationController {
         String notification = "Successful!";
         HttpSession session = req.getSession();
         session.setAttribute("notification", notification);
-        resp.sendRedirect("home.jsp");
+        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
     }
 
     @Override
@@ -30,6 +30,6 @@ public class ReviewRequestServlet extends BaseRequiredAuthenticationController {
         LeaveRequestDao lrd = new LeaveRequestDao();
         ArrayList<LeaveRequest> list = lrd.getOtherRequests(employee);
         req.setAttribute("list", list);
-        req.getRequestDispatcher("reviewRequest.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/reviewRequest.jsp").forward(req, resp);
     }
 }

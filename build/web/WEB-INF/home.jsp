@@ -23,7 +23,7 @@
                 <li><a href="#">My Task</a></li>
                 <li><a href="#">Report</a></li>
                 <li><a href="#">About Us</a></li>
-                <li><a href="login.jsp">Logout</a></li>
+                <li><a href="login">Logout</a></li>
             </ul>
         </div>
 

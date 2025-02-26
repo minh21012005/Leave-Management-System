@@ -13,7 +13,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -24,13 +24,13 @@ public class LoginServlet extends HttpServlet {
         UserDao db = new UserDao();
         User user = db.get(email, password);
         HttpSession session = request.getSession();
-        if (user != null) {           
+        if (user != null) {
             session.setAttribute("user", user);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
         } else {
             String message = "Email or password is incorrect. Please try again!";
             session.setAttribute("message", message);
-            response.sendRedirect("login.jsp");
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }
 }

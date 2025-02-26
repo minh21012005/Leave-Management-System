@@ -1,7 +1,8 @@
-
 package model;
 
-public class User{
+
+public class User {
+
     private int userid;
     private String username;
     private String password;
@@ -15,7 +16,6 @@ public class User{
     public void setUserid(int userid) {
         this.userid = userid;
     }
-    
 
     public String getUsername() {
         return username;
@@ -48,5 +48,5 @@ public class User{
     public void setRoleid(int roleid) {
         this.roleid = roleid;
     }
-    
+
 }
