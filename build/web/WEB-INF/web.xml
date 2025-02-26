@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controller.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRequestServlet</servlet-name>
+        <servlet-class>controller.CreateRequestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyRequestServlet</servlet-name>
+        <servlet-class>controller.ViewMyRequestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewRequestServlet</servlet-name>
+        <servlet-class>controller.ReviewRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRequestServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyRequestServlet</servlet-name>
+        <url-pattern>/myrequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewRequestServlet</servlet-name>
+        <url-pattern>/reviewrequest</url-pattern>
+    </servlet-mapping>
+</web-app>

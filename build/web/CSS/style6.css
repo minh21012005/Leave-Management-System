@@ -1,0 +1,185 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+header nav {
+    margin: 0.5rem 0;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+.user-info {
+    font-size: 0.9rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+/* Main Content */
+main {
+    margin-top: 100px; /* Để tránh chồng lấn với header cố định */
+    padding: 20px;
+}
+
+.filter-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.filter-section h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.filter-section form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Cho phép co giãn trên màn hình nhỏ */
+}
+
+.filter-section input, .filter-section select, .filter-section button {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.filter-section button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+.filter-section button:hover {
+    background-color: #34495e;
+}
+
+/* Employee List */
+.employee-list {
+    display: grid;
+    gap: 20px;
+}
+
+.employee-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex; /* Sử dụng flex để hiển thị thông tin và lịch cùng hàng */
+    flex-wrap: wrap; /* Co giãn trên màn hình nhỏ */
+    gap: 20px; /* Khoảng cách giữa các phần */
+    align-items: flex-start; /* Căn đều theo đầu */
+}
+
+.employee-info, .calendar {
+    flex: 1; /* Chia đều không gian */
+    min-width: 300px; /* Đảm bảo mỗi phần có chiều rộng tối thiểu */
+}
+
+.employee-info h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.employee-info p {
+    margin: 0.5rem 0;
+}
+
+/* Calendar */
+.calendar h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.calendar table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.calendar th, .calendar td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.calendar th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.work-day { background-color: #27ae60; color: white; } /* Green for work days */
+.off-day { background-color: #e74c3c; color: white; }   /* Red for off days */
+.leave-day { background-color: #f1c40f; color: white; } /* Yellow for leave days */
+
+.summary {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .employee-card {
+        flex-direction: column; /* Chuyển thành cột trên màn hình nhỏ */
+    }
+
+    .filter-section form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-section input, .filter-section select, .filter-section button {
+        width: 100%;
+    }
+}

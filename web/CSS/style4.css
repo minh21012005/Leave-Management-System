@@ -1,0 +1,95 @@
+/* Tổng thể trang */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #2c3e50;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Đảm bảo nội dung luôn đầy trang */
+}
+
+/* Header */
+header {
+    background-color: #2c3e50;
+    color: white;
+}
+
+/* Hộp chứa bảng */
+.table-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* Bảng */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Giữ bo góc mềm mại */
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #bdc3c7; /* Viền mỏng, nhẹ hơn */
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Header của bảng */
+th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Bo tròn góc trên */
+th:first-child {
+    border-top-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* Dòng dữ liệu */
+td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd; /* Mỏng hơn, nhẹ nhàng */
+    text-align: center;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+/* Dòng chẵn có màu nền khác */
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Hiệu ứng hover */
+tr:hover {
+    background-color: #ecf0f1;
+}
+
+/* Bo góc dưới */
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    margin-top: auto;
+}

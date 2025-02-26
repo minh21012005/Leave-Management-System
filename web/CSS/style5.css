@@ -1,0 +1,102 @@
+/* Định dạng tổng thể */
+body {
+    background-color: #ecf0f1; /* Nền sáng */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #2c3e50; /* Chữ tối hơn để nổi bật */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #2c3e50;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Hộp chứa bảng */
+.container {
+    width: 80%;
+    margin: 20px 0;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #bdc3c7;
+}
+
+/* Định dạng tiêu đề bảng */
+thead {
+    background-color: #2c3e50;
+    color: white;
+}
+
+thead th {
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ffffff;
+}
+
+/* Định dạng ô dữ liệu */
+tbody td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #bdc3c7;
+    color: #2c3e50;
+}
+
+/* Định dạng từng dòng */
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Nút bấm */
+.btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-approve {
+    background-color: #27ae60;
+}
+
+.btn-reject {
+    background-color: #c0392b;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}

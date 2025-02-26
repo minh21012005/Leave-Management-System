@@ -1,0 +1,33 @@
+package controller;
+
+import dal.LeaveRequestDao;
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Employee;
+import java.sql.Date;
+
+public class CreateRequestServlet extends BaseRequiredAuthenticationController {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp, Employee employee) throws ServletException, IOException {
+        String reason = req.getParameter("reason");
+        Date startDate = Date.valueOf(req.getParameter("fromDate"));
+        Date endDate = Date.valueOf(req.getParameter("toDate"));
+        LeaveRequestDao lrd = new LeaveRequestDao();
+        lrd.set(employee.getEmployeeid(), employee.getManagerid(), startDate, endDate, reason);
+        String message = "Successful!";
+        HttpSession session = req.getSession();
+        session.setAttribute("message", message);
+        resp.sendRedirect("home.jsp");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp, Employee employee) throws ServletException, IOException {
+        req.setAttribute("employee", employee);
+        req.getRequestDispatcher("createRequest.jsp").forward(req, resp);
+    }
+
+}
