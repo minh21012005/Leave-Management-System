@@ -32,11 +32,11 @@
     <body>
 
         <c:if test="${empty sessionScope.user}">
-            <c:redirect url="login.jsp"/>
+            <jsp:forward page="/WEB-INF/login.jsp"/>
         </c:if>
 
         <c:if test="${empty requestScope.employee}">
-            <c:redirect url="login.jsp"/>
+            <jsp:forward page="/WEB-INF/login.jsp"/>
         </c:if>
 
         <header>

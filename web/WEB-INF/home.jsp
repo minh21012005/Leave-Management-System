@@ -13,7 +13,7 @@
     <body>
 
         <c:if test="${empty sessionScope.user}">
-            <c:redirect url="login.jsp"/>
+            <jsp:forward page="/WEB-INF/login.jsp"/>
         </c:if>
 
         <div class="sidebar">
@@ -51,7 +51,7 @@
                 </c:if>
 
                 <c:if test="${not empty user and user.roleid == 1}">
-                    <a href="agenda.jsp" class="btn">📊 Agenda</a>
+                    <a href="agenda" class="btn">📊 Agenda</a>
                 </c:if>
             </div>
         </div>
