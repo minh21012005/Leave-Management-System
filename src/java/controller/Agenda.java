@@ -15,6 +15,8 @@ public class Agenda extends BaseRequiredAuthenticationController{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Employee employee) throws ServletException, IOException {
+        req.setAttribute("employee", employee);
+        req.getRequestDispatcher("/WEB-INF/agenda.jsp").forward(req, resp);
     }
     
 }

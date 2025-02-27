@@ -13,13 +13,22 @@
             function validateForm() {
                 var fromDate = document.getElementById("fromDate").value;
                 var toDate = document.getElementById("toDate").value;
+                var today = new Date();
+                // Đặt giờ, phút, giây, mili giây về 0 để so sánh chính xác ngày
+                today.setHours(0, 0, 0, 0);
 
                 if (fromDate === "" || toDate === "") {
                     alert("Please fill in both Start Date and End Date fields");
                     return false;
                 }
 
-                // Phần tùy chọn: kiểm tra xem toDate có nhỏ hơn fromDate không
+                // Kiểm tra nếu fromDate nhỏ hơn ngày hiện tại
+                if (new Date(fromDate) < today) {
+                    alert("Start Date cannot be in the past");
+                    return false;
+                }
+
+                // Kiểm tra xem toDate có nhỏ hơn fromDate không
                 if (new Date(toDate) < new Date(fromDate)) {
                     alert("End Date must be after Start Date");
                     return false;
@@ -74,7 +83,7 @@
             </form>
         </div>
         <footer>
-            <p>&copy; 2025 My Company. All Rights Reserved.</p>
+            <p>© 2025 My Company. All Rights Reserved.</p>
         </footer>
 
     </body>
