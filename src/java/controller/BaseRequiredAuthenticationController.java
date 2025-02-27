@@ -26,40 +26,29 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
     }
 
     public boolean isAuthorized(HttpServletRequest request, User user) {
-    String contextPath = request.getContextPath(); // "/company"
-    String requestURI = request.getRequestURI();
-    String path = requestURI.substring(contextPath.length());
+        String contextPath = request.getContextPath(); // "/company"
+        String requestURI = request.getRequestURI();
+        String path = requestURI.substring(contextPath.length());
 
-    // Nếu request tới file .jsp (trừ login.jsp) thì chặn luôn
-    if (path.endsWith(".jsp") && !path.equals("/login.jsp")) {
-        return false;
+        int roleId = user.getRoleid();
+
+        switch (roleId) {
+            case 1:
+                return path.equals("/reviewrequest");
+
+            case 2:
+                return path.equals("/myrequest")
+                        || path.equals("/reviewrequest")
+                        || path.equals("/create");
+
+            case 3:
+                return path.equals("/myrequest")
+                        || path.equals("/create");
+
+            default:
+                return false;
+        }
     }
-
-    // Nếu chưa login (user == null) thì chỉ cho phép login.jsp
-    if (user == null) {
-        return path.equals("/login.jsp");
-    }
-
-    // Đã login thì kiểm tra quyền theo role
-    int roleId = user.getRoleid();
-
-    switch (roleId) {
-        case 1:
-            return path.equals("/reviewrequest");
-            
-        case 2:
-            return path.equals("/myrequest") || 
-                   path.equals("/reviewrequest") || 
-                   path.equals("/create");
-                   
-        case 3:
-            return path.equals("/myrequest") || 
-                   path.equals("/create");
-                   
-        default:
-            return false;
-    }
-}
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -67,7 +56,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
         if (employee != null) {
             doPost(req, resp, employee);
         } else {
-            resp.sendRedirect("login.jsp");
+            req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
         }
     }
 
@@ -77,7 +66,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
         if (employee != null) {
             doGet(req, resp, employee);
         } else {
-            resp.sendRedirect("login.jsp");
+            req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
         }
     }
 
