@@ -34,7 +34,8 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
 
         switch (roleId) {
             case 1:
-                return path.equals("/reviewrequest");
+                return path.equals("/reviewrequest")
+                        || path.equals("/agenda");
 
             case 2:
                 return path.equals("/myrequest")

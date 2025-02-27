@@ -108,4 +108,29 @@ public class LeaveRequestDao extends DBcontext {
         }
         return false;
     }
+
+    public ArrayList getApprovedLeaveRequest() {
+        String sql = "SELECT * FROM LeaveRequests WHERE Status = ?";
+        ArrayList<LeaveRequest> list = new ArrayList();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "Approved");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                LeaveRequest leaveRequest = new LeaveRequest();
+                leaveRequest.setRequestid(rs.getInt("RequestID"));
+                leaveRequest.setEmployeeid(rs.getInt("EmployeeID"));
+                leaveRequest.setManagerid(rs.getInt("ManagerID"));
+                leaveRequest.setStartdate(rs.getDate("StartDate"));
+                leaveRequest.setEnddate(rs.getDate("EndDate"));
+                leaveRequest.setReason(rs.getString("Reason"));
+                leaveRequest.setStatus(rs.getString("Status"));
+                leaveRequest.setRequestdate(rs.getDate("RequestDate"));
+                list.add(leaveRequest);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
 }
