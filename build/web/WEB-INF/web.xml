@@ -17,8 +17,8 @@
         <servlet-class>controller.ReviewRequestServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Agenda</servlet-name>
-        <servlet-class>controller.Agenda</servlet-class>
+        <servlet-name>AgendaServlet</servlet-name>
+        <servlet-class>controller.AgendaServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -37,7 +37,7 @@
         <url-pattern>/reviewrequest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Agenda</servlet-name>
+        <servlet-name>AgendaServlet</servlet-name>
         <url-pattern>/agenda</url-pattern>
     </servlet-mapping>
     <session-config>

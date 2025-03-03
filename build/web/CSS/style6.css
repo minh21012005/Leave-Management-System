@@ -10,6 +10,9 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4;
     color: #333;
+    min-height: 100vh; /* Đảm bảo body có chiều cao tối thiểu bằng màn hình */
+    display: flex;
+    flex-direction: column; /* Sử dụng flex để footer nằm dưới cùng */
 }
 
 /* Header */
@@ -53,6 +56,7 @@ header nav a:hover {
 main {
     margin-top: 100px; /* Để tránh chồng lấn với header cố định */
     padding: 20px;
+    flex: 1; /* Cho phép main chiếm không gian còn lại giữa header và footer */
 }
 
 .filter-section {
@@ -147,9 +151,18 @@ main {
     color: white;
 }
 
-.work-day { background-color: #27ae60; color: white; } /* Green for work days */
-.off-day { background-color: #e74c3c; color: white; }   /* Red for off days */
-.leave-day { background-color: #f1c40f; color: white; } /* Yellow for leave days */
+.work-day {
+    background-color: #27ae60;
+    color: white;
+} /* Green for work days */
+.off-day {
+    background-color: #e74c3c;
+    color: white;
+}   /* Red for off days */
+.leave-day {
+    background-color: #f1c40f;
+    color: white;
+} /* Yellow for leave days */
 
 .summary {
     margin-top: 1rem;
@@ -163,9 +176,8 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    /* Loại bỏ position: fixed để footer nằm tự nhiên ở cuối trang */
 }
 
 /* Responsive Design */

@@ -6,25 +6,20 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Approved Leave Requests</title>
+        <title>Employee Agenda System</title>
         <link rel="stylesheet" href="./CSS/style6.css">
-        <style>
-            .leave-card { border: 1px solid #ccc; margin: 10px 0; padding: 10px; }
-            .calendar table { width: 100%; border-collapse: collapse; }
-            .calendar th, .calendar td { border: 1px solid #ddd; text-align: center; padding: 5px; }
-            .work-day { background-color: #90ee90; } /* Green for work */
-            .leave-day { background-color: #ffff99; } /* Yellow for leave */
-            .off-day { background-color: #ffcccb; } /* Red for off */
-        </style>
     </head>
     <body>
         <c:if test="${empty sessionScope.user}">
             <jsp:forward page="/WEB-INF/login.jsp"/>
         </c:if>
+        <c:set var="weekStart" value="${requestScope.weekStart}"/>
+        <c:set var="weekEnd" value="${requestScope.weekEnd}"/>
+        <c:set var="list" value="${requestScope.list}"/>
 
         <!-- Header -->
         <header>
-            <h1>Approved Leave Requests</h1>
+            <h1>Employee Agenda System</h1>
             <nav>
                 <a href="#">Dashboard</a> | 
                 <a href="#">Schedules</a> | 
@@ -39,38 +34,17 @@
         <main>
             <!-- Leave Requests List -->
             <section class="leave-list">
-                <h2>Approved Leave Requests</h2>
                 <c:choose>
-                    <c:when test="${not empty requestScope.leaveRequests}">
+                    <c:when test="${not empty list}">
                         <!-- Tính toán ngày bắt đầu và kết thúc của tuần hiện tại -->
-                        <%
-                            Calendar cal = Calendar.getInstance();
-                            cal.setTime(new java.util.Date()); // Lấy ngày hiện tại của hệ thống
-                            cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY); // Đặt về thứ Hai của tuần
-                            java.sql.Date weekStart = new java.sql.Date(cal.getTimeInMillis());
-                            cal.add(Calendar.DATE, 6); // Cộng 6 ngày để đến Chủ nhật
-                            java.sql.Date weekEnd = new java.sql.Date(cal.getTimeInMillis());
-                            request.setAttribute("weekStart", weekStart);
-                            request.setAttribute("weekEnd", weekEnd);
-                        %>
-                        <c:forEach var="leave" items="${requestScope.leaveRequests}">
+                        <c:forEach var="leave" items="${list}">
                             <div class="leave-card">
                                 <!-- Leave Information -->
                                 <div class="leave-info">
-                                    <h3>Request ID: <c:out value="${leave.requestid}"/></h3>
                                     <p><strong>Employee ID:</strong> <c:out value="${leave.employeeid}"/></p>
+                                    <p><strong>Full Name:</strong> <c:out value="${leave.fullname}"/></p>
+                                    <p><strong>Department:</strong> <c:out value="${leave.department}"/></p>
                                     <p><strong>Manager ID:</strong> <c:out value="${leave.managerid}"/></p>
-                                    <p><strong>Start Date:</strong> 
-                                        <fmt:formatDate value="${leave.startdate}" pattern="dd/MM/yyyy"/>
-                                    </p>
-                                    <p><strong>End Date:</strong> 
-                                        <fmt:formatDate value="${leave.enddate}" pattern="dd/MM/yyyy"/>
-                                    </p>
-                                    <p><strong>Reason:</strong> <c:out value="${leave.reason}"/></p>
-                                    <p><strong>Status:</strong> <c:out value="${leave.status}"/></p>
-                                    <p><strong>Request Date:</strong> 
-                                        <fmt:formatDate value="${leave.requestdate}" pattern="dd/MM/yyyy"/>
-                                    </p>
                                 </div>
 
                                 <!-- Weekly Schedule (Dynamic based on system date) -->

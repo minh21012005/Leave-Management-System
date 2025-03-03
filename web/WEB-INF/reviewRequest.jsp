@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -36,10 +37,10 @@
                             <td>${request.requestid}</td>
                             <td>${request.employeeid}</td>
                             <td>${request.managerid}</td>
-                            <td>${request.startdate}</td>
-                            <td>${request.enddate}</td>
+                            <td><fmt:formatDate value="${request.startdate}" pattern="dd/MM/yyyy"/></td>
+                            <td><fmt:formatDate value="${request.enddate}" pattern="dd/MM/yyyy"/></td>
                             <td>${request.reason}</td>
-                            <td>${request.requestdate}</td>
+                            <td><fmt:formatDate value="${request.requestdate}" pattern="dd/MM/yyyy"/></td>
                             <td>
                                 <form action="reviewrequest" method="post">
                                     <input type="hidden" name="requestid" value="${request.requestid}">
@@ -54,7 +55,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2025 My Company. All Rights Reserved.</p>
+            <p>© 2025 My Company. All Rights Reserved.</p>
         </footer>
 
     </body>

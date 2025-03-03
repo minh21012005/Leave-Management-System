@@ -9,6 +9,7 @@ import model.Employee;
 import model.LeaveRequest;
 import java.sql.Date;
 import java.util.ArrayList;
+import model.EmployeeAgenda;
 
 public class LeaveRequestDao extends DBcontext {
 
@@ -110,23 +111,24 @@ public class LeaveRequestDao extends DBcontext {
     }
 
     public ArrayList getApprovedLeaveRequest() {
-        String sql = "SELECT * FROM LeaveRequests WHERE Status = ?";
-        ArrayList<LeaveRequest> list = new ArrayList();
+        String sql = "select le.EmployeeID, e.FullName, e.Department, e.ManagerID, le.StartDate, le.EndDate from LeaveRequests le\n"
+                + "join Employees e\n"
+                + "on le.EmployeeID = e.EmployeeID\n"
+                + "where le.Status = ?";
+        ArrayList<EmployeeAgenda> list = new ArrayList();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, "Approved");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                LeaveRequest leaveRequest = new LeaveRequest();
-                leaveRequest.setRequestid(rs.getInt("RequestID"));
-                leaveRequest.setEmployeeid(rs.getInt("EmployeeID"));
-                leaveRequest.setManagerid(rs.getInt("ManagerID"));
-                leaveRequest.setStartdate(rs.getDate("StartDate"));
-                leaveRequest.setEnddate(rs.getDate("EndDate"));
-                leaveRequest.setReason(rs.getString("Reason"));
-                leaveRequest.setStatus(rs.getString("Status"));
-                leaveRequest.setRequestdate(rs.getDate("RequestDate"));
-                list.add(leaveRequest);
+                EmployeeAgenda ea = new EmployeeAgenda();
+                ea.setEmployeeid(rs.getInt("EmployeeID"));
+                ea.setFullname(rs.getString("FullName"));
+                ea.setDepartment(rs.getString("Department"));
+                ea.setManagerid(rs.getInt("ManagerID"));
+                ea.setStartdate(rs.getDate("StartDate"));
+                ea.setEnddate(rs.getDate("EndDate"));
+                list.add(ea);
             }
         } catch (SQLException e) {
             Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);

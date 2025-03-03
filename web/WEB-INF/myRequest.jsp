@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,18 +31,18 @@
                         <td>${request.employeeid}</td>
                         <td>${request.managerid}</td>
                         <td>${requestScope.department}</td>
-                        <td>${request.startdate}</td>
-                        <td>${request.enddate}</td>
+                        <td><fmt:formatDate value="${request.startdate}" pattern="dd/MM/yyyy"/></td>
+                        <td><fmt:formatDate value="${request.enddate}" pattern="dd/MM/yyyy"/></td>
                         <td>${request.reason}</td>
                         <td>${request.status}</td>
-                        <td>${request.requestdate}</td>
+                        <td><fmt:formatDate value="${request.requestdate}" pattern="dd/MM/yyyy"/></td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
 
         <footer>
-            <p>&copy; 2025 My Company. All Rights Reserved.</p>
+            <p>© 2025 My Company. All Rights Reserved.</p>
         </footer>
     </body>
 </html>
