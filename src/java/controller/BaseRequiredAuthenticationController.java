@@ -26,7 +26,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
     }
 
     public boolean isAuthorized(HttpServletRequest request, User user) {
-        String contextPath = request.getContextPath(); // "/company"
+        String contextPath = request.getContextPath(); 
         String requestURI = request.getRequestURI();
         String path = requestURI.substring(contextPath.length());
 
@@ -40,12 +40,13 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
             case 2:
                 return path.equals("/myrequest")
                         || path.equals("/reviewrequest")
-                        || path.equals("/create");
+                        || path.equals("/create")
+                        || path.equals("/update");
 
             case 3:
                 return path.equals("/myrequest")
-                        || path.equals("/create");
-
+                        || path.equals("/create")
+                        || path.equals("/update");
             default:
                 return false;
         }

@@ -9,7 +9,7 @@
     </head>
     <body>
         <c:set var="list" value="${requestScope.list}"/>
-        
+
         <header>
             <h1>My Leave Requests</h1>
         </header>
@@ -25,6 +25,7 @@
                     <th>Reason</th>
                     <th>Status</th>
                     <th>Request Date</th>
+                    <th>Update</th>
                 </tr>
                 <c:forEach items="${list}" var="request">
                     <tr>
@@ -36,6 +37,13 @@
                         <td>${request.reason}</td>
                         <td>${request.status}</td>
                         <td><fmt:formatDate value="${request.requestdate}" pattern="dd/MM/yyyy"/></td>
+                        <td>
+                            <c:if test="${request.status == 'Pending'}">
+                                <form action="update" method="POST">
+                                    <button type="submit">Update</button>
+                                </form>
+                            </c:if>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
