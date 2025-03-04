@@ -39,7 +39,8 @@
                         <td><fmt:formatDate value="${request.requestdate}" pattern="dd/MM/yyyy"/></td>
                         <td>
                             <c:if test="${request.status == 'Pending'}">
-                                <form action="update" method="POST">
+                                <form action="update">
+                                    <input type="hidden" name="requestid" value="${request.requestid}">
                                     <button type="submit">Update</button>
                                 </form>
                             </c:if>

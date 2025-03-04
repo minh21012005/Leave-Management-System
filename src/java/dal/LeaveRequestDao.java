@@ -41,52 +41,21 @@ public class LeaveRequestDao extends DBcontext {
         return null;
     }
 
-    public int set(int employeeid, int managerid, Date startdate, Date endDate, String reason) {
-        String sqlInsert = "INSERT INTO LeaveRequests (EmployeeID, ManagerID, StartDate, EndDate, Reason) VALUES (?, ?, ?, ?, ?)";
-        String sqlGetId = "SELECT @@IDENTITY AS RequestID";
-
+    public boolean set(int employeeid, int managerid, Date startdate, Date endDate, String reason) {
+        String sql = "INSERT INTO LeaveRequests (EmployeeID, ManagerID, StartDate, EndDate, Reason) VALUES (?, ?, ?, ?, ?)";
         try {
-            // Bắt đầu transaction
-            connection.setAutoCommit(false);
-
-            // Chuẩn bị và thực thi câu lệnh INSERT
-            PreparedStatement stInsert = connection.prepareStatement(sqlInsert);
-            stInsert.setInt(1, employeeid);
-            stInsert.setInt(2, managerid);
-            stInsert.setDate(3, startdate);
-            stInsert.setDate(4, endDate);
-            stInsert.setString(5, reason);
-            stInsert.executeUpdate();
-
-            // Lấy RequestID vừa tạo bằng @@IDENTITY
-            PreparedStatement stGetId = connection.prepareStatement(sqlGetId);
-            ResultSet rs = stGetId.executeQuery();
-            int requestId = -1;
-            if (rs.next()) {
-                requestId = rs.getInt("RequestID"); // Lấy giá trị RequestID
-            }
-
-            // Kết thúc transaction thành công
-            connection.commit();
-            return requestId;
-
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, employeeid);
+            st.setInt(2, managerid);
+            st.setDate(3, startdate);
+            st.setDate(4, endDate);
+            st.setString(5, reason);
+            st.executeUpdate();
+            return true;
         } catch (SQLException e) {
-            try {
-                // Nếu có lỗi, rollback transaction
-                connection.rollback();
-            } catch (SQLException rollbackEx) {
-                Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, "Rollback failed", rollbackEx);
-            }
             Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);
-            return -1;
-        } finally {
-            try {
-                // Khôi phục chế độ auto-commit
-                connection.setAutoCommit(true);
-            } catch (SQLException e) {
-                Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, "Reset auto-commit failed", e);
-            }
         }
+        return false;
     }
 
     public ArrayList getOtherRequests(Employee employee) {
@@ -165,5 +134,22 @@ public class LeaveRequestDao extends DBcontext {
             Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);
         }
         return list;
+    }
+
+    public boolean update(int id, String reason, Date startdate, Date enddate) {
+        String sql = "UPDATE [dbo].[LeaveRequests]\n"
+                + "   SET StartDate = ?, EndDate = ?, Reason= ?\n"
+                + " WHERE RequestID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setDate(1, startdate);
+            st.setDate(2, enddate);
+            st.setString(3,reason);
+            st.setInt(4, id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

@@ -93,3 +93,31 @@ footer {
     text-align: center;
     margin-top: auto;
 }
+/* Định dạng chung cho nút Update */
+button[type="submit"] {
+    background-color: #4CAF50; /* Màu xanh lá cây */
+    color: white;             /* Màu chữ trắng */
+    padding: 8px 16px;        /* Khoảng đệm bên trong */
+    border: none;             /* Loại bỏ viền mặc định */
+    border-radius: 4px;       /* Bo góc */
+    cursor: pointer;          /* Con trỏ chuột thành bàn tay khi hover */
+    font-size: 14px;          /* Cỡ chữ */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+/* Hiệu ứng khi hover lên nút */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Màu xanh đậm hơn khi hover */
+}
+
+/* Đảm bảo nút căn giữa trong ô bảng */
+td form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Nếu muốn nút nhỏ gọn hơn trong bảng */
+button[type="submit"] {
+    padding: 6px 12px; /* Giảm kích thước nếu cần */
+}

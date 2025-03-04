@@ -1,22 +1,36 @@
 
 package controller;
 
+import dal.LeaveRequestDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 import model.Employee;
 
 public class UpdateServlet extends BaseRequiredAuthenticationController{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp, Employee employee) throws ServletException, IOException {
-        req.setAttribute("employee", employee);
-        req.getRequestDispatcher("/WEB-INF/createRequest.jsp").forward(req, resp);
+        int requestid = Integer.parseInt(req.getParameter("requestid"));
+        String reason = req.getParameter("reason");
+        Date startDate = Date.valueOf(req.getParameter("fromDate"));
+        Date endDate = Date.valueOf(req.getParameter("toDate"));
+        LeaveRequestDao lrd = new LeaveRequestDao();
+        lrd.update(requestid, reason, startDate, endDate);
+        String message = "Successful!";
+        HttpSession session = req.getSession();
+        session.setAttribute("message", message);
+        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Employee employee) throws ServletException, IOException {
+        req.setAttribute("employee", employee);
+        int requestid = Integer.parseInt(req.getParameter("requestid"));
+        req.setAttribute("requestid", requestid);
+        req.getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
     }
-    
 }
