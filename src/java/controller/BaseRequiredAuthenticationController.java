@@ -41,12 +41,14 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
                 return path.equals("/myrequest")
                         || path.equals("/reviewrequest")
                         || path.equals("/create")
-                        || path.equals("/update");
+                        || path.equals("/update")
+                        || path.equals("/delete");
 
             case 3:
                 return path.equals("/myrequest")
                         || path.equals("/create")
-                        || path.equals("/update");
+                        || path.equals("/update")
+                        || path.equals("/delete");
             default:
                 return false;
         }

@@ -70,26 +70,46 @@ tbody tr:nth-child(odd) {
     background-color: #ffffff;
 }
 
-/* Nút bấm */
+/* Container cho các nút trong ô Status */
+td .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa Approve và Reject */
+}
+
+/* Định dạng chung cho nút */
 .btn {
-    padding: 8px 12px;
-    border-radius: 5px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
+    padding: 6px 12px;        /* Kích thước nhỏ gọn, đồng đều với Update/Delete */
+    border: none;             /* Loại bỏ viền */
+    border-radius: 6px;       /* Bo góc mềm mại */
+    color: white;             /* Chữ trắng */
+    cursor: pointer;          /* Con trỏ tay */
+    font-size: 14px;          /* Cỡ chữ đồng đều */
+    font-weight: 600;         /* Chữ hơi đậm */
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà cho màu và bóng */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Bóng nhẹ */
+    min-width: 80px;          /* Đảm bảo kích thước tối thiểu */
 }
 
+/* Nút Approve - Màu xanh lá */
 .btn-approve {
-    background-color: #27ae60;
+    background-color: #4CAF50; /* Màu xanh lá đặc trưng */
 }
 
+.btn-approve:hover {
+    background-color: #45a049; /* Màu xanh đậm hơn khi hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Tăng bóng khi hover */
+}
+
+/* Nút Reject - Màu đỏ */
 .btn-reject {
-    background-color: #c0392b;
+    background-color: #e74c3c; /* Màu đỏ đặc trưng */
 }
 
-.btn:hover {
-    opacity: 0.9;
+.btn-reject:hover {
+    background-color: #c0392b; /* Màu đỏ đậm hơn khi hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Tăng bóng khi hover */
 }
 
 /* Footer */

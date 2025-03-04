@@ -42,11 +42,13 @@
                             <td>${request.reason}</td>
                             <td><fmt:formatDate value="${request.requestdate}" pattern="dd/MM/yyyy"/></td>
                             <td>
-                                <form action="reviewrequest" method="post">
-                                    <input type="hidden" name="requestid" value="${request.requestid}">
-                                    <button type="submit" name="action" value="approve" class="btn btn-approve">Approve</button>
-                                    <button type="submit" name="action" value="reject" class="btn btn-reject">Reject</button>
-                                </form>
+                                <div class="button-container">
+                                    <form action="reviewrequest" method="post">
+                                        <input type="hidden" name="requestid" value="${request.requestid}">
+                                        <button type="submit" name="action" value="approve" class="btn btn-approve">Approve</button>
+                                        <button type="submit" name="action" value="reject" class="btn btn-reject">Reject</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     </c:forEach>

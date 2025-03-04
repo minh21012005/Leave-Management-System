@@ -144,9 +144,24 @@ public class LeaveRequestDao extends DBcontext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setDate(1, startdate);
             st.setDate(2, enddate);
-            st.setString(3,reason);
+            st.setString(3, reason);
             st.setInt(4, id);
             st.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean delete(int id) {
+        String sql = "DELETE FROM [dbo].[LeaveRequests]\n"
+                + "      WHERE RequestID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, ex);
         }
