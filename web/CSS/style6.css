@@ -10,9 +10,9 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4;
     color: #333;
-    min-height: 100vh; /* Đảm bảo body có chiều cao tối thiểu bằng màn hình */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Sử dụng flex để footer nằm dưới cùng */
+    flex-direction: column;
 }
 
 /* Header */
@@ -52,122 +52,158 @@ header nav a:hover {
     top: 1rem;
 }
 
+.weekly-schedule {
+    margin-top: 1rem;
+}
+
+.weekly-schedule h4 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
 /* Main Content */
 main {
-    margin-top: 100px; /* Để tránh chồng lấn với header cố định */
+    margin-top: 120px;
     padding: 20px;
-    flex: 1; /* Cho phép main chiếm không gian còn lại giữa header và footer */
+    flex: 1;
 }
 
-.filter-section {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-}
-
-.filter-section h2 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-}
-
-.filter-section form {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap; /* Cho phép co giãn trên màn hình nhỏ */
-}
-
-.filter-section input, .filter-section select, .filter-section button {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.filter-section button {
-    background-color: #2c3e50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s; /* Hiệu ứng chuyển màu mượt mà */
-}
-
-.filter-section button:hover {
-    background-color: #34495e;
-}
-
-/* Employee List */
 .employee-list {
     display: grid;
-    gap: 20px;
+    gap: 30px;
 }
 
 .employee-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex; /* Sử dụng flex để hiển thị thông tin và lịch cùng hàng */
-    flex-wrap: wrap; /* Co giãn trên màn hình nhỏ */
-    gap: 20px; /* Khoảng cách giữa các phần */
-    align-items: flex-start; /* Căn đều theo đầu */
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    max-height: 250px;
+    overflow: hidden;
 }
 
-.employee-info, .calendar {
-    flex: 1; /* Chia đều không gian */
-    min-width: 300px; /* Đảm bảo mỗi phần có chiều rộng tối thiểu */
+.employee-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Đường phân cách giữa employee-info và calendar */
+.employee-card::before {
+    content: '';
+    position: absolute;
+    left: 350px;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background-color: #e0e0e0;
+}
+
+.employee-info {
+    width: 300px;
+    min-width: 250px;
+}
+
+.calendar {
+    margin-left: 100px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .employee-info h3 {
     color: #2c3e50;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .employee-info p {
-    margin: 0.5rem 0;
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
 }
 
 /* Calendar */
-.calendar h4 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-}
-
 .calendar table {
+    margin-top: 20px;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+    border-collapse: separate; /* Sử dụng separate để bo góc */
+    border-spacing: 0; /* Loại bỏ khoảng cách giữa các ô */
+    max-width: 900px;
+    table-layout: fixed;
+    border-radius: 8px; /* Bo góc cho toàn bộ bảng */
+    overflow: hidden; /* Đảm bảo các góc bo tròn không bị cắt */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Thêm shadow nhẹ cho bảng */
 }
 
 .calendar th, .calendar td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 1px solid #e0e0e0; /* Làm mềm viền bằng màu nhạt hơn */
+    padding: 12px; /* Tăng padding để thoáng hơn */
     text-align: center;
+    font-size: 1rem;
+    height: 50px;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+/* Bo góc cho các ô ở góc */
+.calendar th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.calendar th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.calendar td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+.calendar td:last-child {
+    border-bottom-right-radius: 8px;
 }
 
 .calendar th {
-    background-color: #2c3e50;
+    background-color: #34495e;
     color: white;
 }
 
+.calendar td {
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    height: 50px;
+}
+
+/* Làm mềm màu sắc và thêm hiệu ứng hover */
 .work-day {
-    background-color: #27ae60;
+    background-color: #34c759; /* Màu xanh lá dịu hơn */
     color: white;
-} /* Green for work days */
+}
+
 .off-day {
-    background-color: #e74c3c;
+    background-color: #ff6b6b; /* Màu đỏ dịu hơn */
     color: white;
-}   /* Red for off days */
+}
+
 .leave-day {
-    background-color: #f1c40f;
+    background-color: #ffd700; /* Màu vàng dịu hơn */
     color: white;
-} /* Yellow for leave days */
+}
 
 .summary {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     font-weight: bold;
     color: #2c3e50;
+    font-size: 1.1rem;
 }
 
 /* Footer */
@@ -175,23 +211,52 @@ footer {
     background-color: #2c3e50;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     width: 100%;
-    /* Loại bỏ position: fixed để footer nằm tự nhiên ở cuối trang */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .employee-card {
-        flex-direction: column; /* Chuyển thành cột trên màn hình nhỏ */
-    }
-
-    .filter-section form {
         flex-direction: column;
-        gap: 10px;
+        justify-content: center;
+        max-width: 100%;
+        max-height: none;
+        overflow: visible;
     }
 
-    .filter-section input, .filter-section select, .filter-section button {
+    .employee-card::before {
+        display: none;
+    }
+
+    .employee-info {
         width: 100%;
+        min-width: 0;
+    }
+
+    .calendar {
+        margin-left: 0;
+        width: 100%;
+        align-items: center;
+    }
+
+    .calendar table {
+        max-width: 100%;
+    }
+
+    main {
+        margin-top: 140px;
+    }
+
+    .calendar th, .calendar td {
+        padding: 8px;
+        font-size: 1rem;
+        min-width: 70px;
+        height: 40px;
+    }
+
+    .summary {
+        margin-top: 1rem;
+        text-align: center;
     }
 }
