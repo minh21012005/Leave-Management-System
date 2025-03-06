@@ -1,20 +1,22 @@
-
 package model;
+        
+import java.util.List;
 
-import java.sql.Date;
-
-/**
- *
- * @author minho
- */
 public class EmployeeAgenda {
-
     private int employeeid;
     private int managerid;
     private String department;
     private String fullname;
-    private Date startdate;
-    private Date enddate;
+    private List<LeavePeriod> leavePeriods; // Danh sách các khoảng nghỉ
+
+    // Getters và Setters
+    public List<LeavePeriod> getLeavePeriods() {
+        return leavePeriods;
+    }
+
+    public void setLeavePeriods(List<LeavePeriod> leavePeriods) {
+        this.leavePeriods = leavePeriods;
+    }
 
     public int getEmployeeid() {
         return employeeid;
@@ -48,20 +50,5 @@ public class EmployeeAgenda {
         this.fullname = fullname;
     }
 
-    public Date getStartdate() {
-        return startdate;
-    }
-
-    public void setStartdate(Date startdate) {
-        this.startdate = startdate;
-    }
-
-    public Date getEnddate() {
-        return enddate;
-    }
-
-    public void setEnddate(Date enddate) {
-        this.enddate = enddate;
-    }
-
+    
 }

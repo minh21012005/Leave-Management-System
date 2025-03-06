@@ -19,23 +19,27 @@ public class AgendaServlet extends BaseRequiredAuthenticationController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Employee employee) throws ServletException, IOException {
-        // Tính ngày bắt đầu và kết thúc của tuần hiện tại (hoặc tuần được chọn)
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY); // Bắt đầu từ thứ Hai
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         Date weekStart = new java.sql.Date(cal.getTimeInMillis());
-        cal.add(Calendar.DATE, 6); // Cuối tuần (Chủ nhật)
+        cal.add(Calendar.DATE, 6);
         Date weekEnd = new java.sql.Date(cal.getTimeInMillis());
 
-        // Gọi DAO
+        // Tính danh sách các ngày trong tuần
+        ArrayList<Date> weekDays = new ArrayList<>();
+        for (int i = 0; i <= 6; i++) {
+            long time = weekStart.getTime() + i * 24 * 60 * 60 * 1000L;
+            weekDays.add(new java.sql.Date(time));
+        }
+
         LeaveRequestDao dao = new LeaveRequestDao();
         ArrayList<EmployeeAgenda> list = dao.getApprovedLeaveRequest(weekStart, weekEnd);
 
-        // Đặt thuộc tính để truyền sang JSP
         req.setAttribute("weekStart", weekStart);
         req.setAttribute("weekEnd", weekEnd);
+        req.setAttribute("weekDays", weekDays); // Truyền danh sách ngày
         req.setAttribute("list", list);
 
-        // Chuyển hướng tới JSP
         req.getRequestDispatcher("/WEB-INF/agenda.jsp").forward(req, resp);
     }
 

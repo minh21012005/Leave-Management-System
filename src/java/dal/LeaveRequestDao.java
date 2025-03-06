@@ -9,7 +9,10 @@ import model.Employee;
 import model.LeaveRequest;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import model.EmployeeAgenda;
+import model.LeavePeriod;
 
 public class LeaveRequestDao extends DBcontext {
 
@@ -111,38 +114,57 @@ public class LeaveRequestDao extends DBcontext {
     }
 
     public ArrayList<EmployeeAgenda> getApprovedLeaveRequest(Date weekStart, Date weekEnd) {
-        String sql = "SELECT e.EmployeeID, e.FullName, e.Department, e.ManagerID, le.StartDate, le.EndDate "
-                + "FROM Employees e "
-                + "LEFT JOIN LeaveRequests le "
-                + "ON le.EmployeeID = e.EmployeeID "
-                + "AND le.Status = ? "
-                + // Chỉ lấy đơn Approved
-                "AND (le.StartDate <= ? AND le.EndDate >= ?) "
-                + // Lọc trong tuần
-                "WHERE e.EmployeeID != 1"; // Loại bỏ giám đốc
+    String sql = "SELECT e.EmployeeID, e.FullName, e.Department, e.ManagerID, " +
+                 "le.StartDate, le.EndDate " +
+                 "FROM Employees e " +
+                 "LEFT JOIN LeaveRequests le " +
+                 "ON le.EmployeeID = e.EmployeeID " +
+                 "AND le.Status = ? " +
+                 "AND (le.StartDate <= ? AND le.EndDate >= ?) " +
+                 "WHERE e.EmployeeID != 1 " +
+                 "ORDER BY e.EmployeeID";
 
-        ArrayList<EmployeeAgenda> list = new ArrayList<>();
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, "Approved");
-            st.setDate(2, new java.sql.Date(weekEnd.getTime()));
-            st.setDate(3, new java.sql.Date(weekStart.getTime()));
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                EmployeeAgenda ea = new EmployeeAgenda();
-                ea.setEmployeeid(rs.getInt("EmployeeID"));
+    ArrayList<EmployeeAgenda> list = new ArrayList<>();
+        Map<Integer, EmployeeAgenda> employeeMap = new HashMap<>(); // Để gộp nhân viên
+
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setString(1, "Approved");
+        st.setDate(2, new java.sql.Date(weekEnd.getTime()));
+        st.setDate(3, new java.sql.Date(weekStart.getTime()));
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            int employeeId = rs.getInt("EmployeeID");
+            EmployeeAgenda ea;
+
+            // Nếu nhân viên đã tồn tại trong map, lấy ra để cập nhật
+            if (employeeMap.containsKey(employeeId)) {
+                ea = employeeMap.get(employeeId);
+            } else {
+                // Tạo mới EmployeeAgenda nếu chưa tồn tại
+                ea = new EmployeeAgenda();
+                ea.setEmployeeid(employeeId);
                 ea.setFullname(rs.getString("FullName"));
                 ea.setDepartment(rs.getString("Department"));
                 ea.setManagerid(rs.getInt("ManagerID"));
-                ea.setStartdate(rs.getDate("StartDate")); // Có thể là NULL
-                ea.setEnddate(rs.getDate("EndDate"));     // Có thể là NULL
-                list.add(ea);
+                ea.setLeavePeriods(new ArrayList<>()); // Thêm danh sách các khoảng nghỉ
+                employeeMap.put(employeeId, ea);
+                list.add(ea); // Thêm vào danh sách kết quả
             }
-        } catch (SQLException e) {
-            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);
+
+            // Thêm khoảng thời gian nghỉ phép nếu có
+            Date startDate = rs.getDate("StartDate");
+            Date endDate = rs.getDate("EndDate");
+            if (startDate != null && endDate != null) {
+                ea.getLeavePeriods().add(new LeavePeriod(startDate, endDate));
+            }
         }
-        return list;
+    } catch (SQLException e) {
+        Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);
     }
+    return list;
+}
 
     public boolean update(int id, String reason, Date startdate, Date enddate) {
         String sql = "UPDATE [dbo].[LeaveRequests]\n"
