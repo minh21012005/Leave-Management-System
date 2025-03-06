@@ -9,7 +9,6 @@ public class EmployeeAgenda {
     private String fullname;
     private List<LeavePeriod> leavePeriods; // Danh sách các khoảng nghỉ
 
-    // Getters và Setters
     public List<LeavePeriod> getLeavePeriods() {
         return leavePeriods;
     }

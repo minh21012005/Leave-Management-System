@@ -33,7 +33,7 @@ public class AgendaServlet extends BaseRequiredAuthenticationController {
         }
 
         LeaveRequestDao dao = new LeaveRequestDao();
-        ArrayList<EmployeeAgenda> list = dao.getApprovedLeaveRequest(weekStart, weekEnd);
+        ArrayList<EmployeeAgenda> list = dao.getEmployeeAgendaList(weekStart, weekEnd);
 
         req.setAttribute("weekStart", weekStart);
         req.setAttribute("weekEnd", weekEnd);

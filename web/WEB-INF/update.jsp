@@ -71,10 +71,10 @@
                 <input type="text" name="department" id="department" readonly value="${employee.department}">
 
                 <label>From (Start Date):</label>
-                <input type="date" name="fromDate" id="fromDate">
+                <input type="date" name="fromDate" id="fromDate" value="${requestScope.startdate}">
 
                 <label>To (End Date):</label>
-                <input type="date" name="toDate" id="toDate">
+                <input type="date" name="toDate" id="toDate" value="${requestScope.enddate}">
 
                 <label>Reason:</label>
                 <textarea name="reason" id="reason"></textarea>

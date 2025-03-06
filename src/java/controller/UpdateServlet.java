@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import model.Employee;
+import model.LeaveRequest;
 
 public class UpdateServlet extends BaseRequiredAuthenticationController{
 
@@ -31,6 +32,12 @@ public class UpdateServlet extends BaseRequiredAuthenticationController{
         req.setAttribute("employee", employee);
         int requestid = Integer.parseInt(req.getParameter("requestid"));
         req.setAttribute("requestid", requestid);
+        LeaveRequestDao lrd = new LeaveRequestDao();
+        LeaveRequest lr = lrd.getRequestById(requestid);
+        Date startDate = lr.getStartdate();
+        Date endDate = lr.getEnddate();
+        req.setAttribute("startdate", startDate);
+        req.setAttribute("enddate", endDate);
         req.getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
     }
 }

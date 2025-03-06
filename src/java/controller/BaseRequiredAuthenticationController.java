@@ -26,7 +26,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
     }
 
     public boolean isAuthorized(HttpServletRequest request, User user) {
-        String contextPath = request.getContextPath(); 
+        String contextPath = request.getContextPath();
         String requestURI = request.getRequestURI();
         String path = requestURI.substring(contextPath.length());
 

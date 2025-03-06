@@ -1,8 +1,9 @@
-
 package model;
 
 import java.sql.Date;
+
 public class LeavePeriod {
+
     private Date startDate;
     private Date endDate;
 

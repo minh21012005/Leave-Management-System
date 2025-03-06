@@ -44,6 +44,25 @@ public class LeaveRequestDao extends DBcontext {
         return null;
     }
 
+    public LeaveRequest getRequestById(int requestid) {
+        String sql = "SELECT [StartDate]\n"
+                + "      ,[EndDate]\n"
+                + "  FROM [dbo].[LeaveRequests] where RequestID = ?";
+        LeaveRequest leaveRequest = new LeaveRequest();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, requestid);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                leaveRequest.setStartdate(rs.getDate("StartDate"));
+                leaveRequest.setEnddate(rs.getDate("EndDate"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return leaveRequest;
+    }
+
     public boolean set(int employeeid, int managerid, Date startdate, Date endDate, String reason) {
         String sql = "INSERT INTO LeaveRequests (EmployeeID, ManagerID, StartDate, EndDate, Reason) VALUES (?, ?, ?, ?, ?)";
         try {
@@ -113,58 +132,58 @@ public class LeaveRequestDao extends DBcontext {
         return false;
     }
 
-    public ArrayList<EmployeeAgenda> getApprovedLeaveRequest(Date weekStart, Date weekEnd) {
-    String sql = "SELECT e.EmployeeID, e.FullName, e.Department, e.ManagerID, " +
-                 "le.StartDate, le.EndDate " +
-                 "FROM Employees e " +
-                 "LEFT JOIN LeaveRequests le " +
-                 "ON le.EmployeeID = e.EmployeeID " +
-                 "AND le.Status = ? " +
-                 "AND (le.StartDate <= ? AND le.EndDate >= ?) " +
-                 "WHERE e.EmployeeID != 1 " +
-                 "ORDER BY e.EmployeeID";
+    public ArrayList<EmployeeAgenda> getEmployeeAgendaList(Date weekStart, Date weekEnd) {
+        String sql = "SELECT e.EmployeeID, e.FullName, e.Department, e.ManagerID, "
+                + "le.StartDate, le.EndDate "
+                + "FROM Employees e "
+                + "LEFT JOIN LeaveRequests le "
+                + "ON le.EmployeeID = e.EmployeeID "
+                + "AND le.Status = ? "
+                + "AND (le.StartDate <= ? AND le.EndDate >= ?) "
+                + "WHERE e.EmployeeID != 1 "
+                + "ORDER BY e.EmployeeID";
 
-    ArrayList<EmployeeAgenda> list = new ArrayList<>();
+        ArrayList<EmployeeAgenda> list = new ArrayList<>();
         Map<Integer, EmployeeAgenda> employeeMap = new HashMap<>(); // Để gộp nhân viên
 
-    try {
-        PreparedStatement st = connection.prepareStatement(sql);
-        st.setString(1, "Approved");
-        st.setDate(2, new java.sql.Date(weekEnd.getTime()));
-        st.setDate(3, new java.sql.Date(weekStart.getTime()));
-        ResultSet rs = st.executeQuery();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "Approved");
+            st.setDate(2, new java.sql.Date(weekEnd.getTime()));
+            st.setDate(3, new java.sql.Date(weekStart.getTime()));
+            ResultSet rs = st.executeQuery();
 
-        while (rs.next()) {
-            int employeeId = rs.getInt("EmployeeID");
-            EmployeeAgenda ea;
+            while (rs.next()) {
+                int employeeId = rs.getInt("EmployeeID");
+                EmployeeAgenda ea;
 
-            // Nếu nhân viên đã tồn tại trong map, lấy ra để cập nhật
-            if (employeeMap.containsKey(employeeId)) {
-                ea = employeeMap.get(employeeId);
-            } else {
-                // Tạo mới EmployeeAgenda nếu chưa tồn tại
-                ea = new EmployeeAgenda();
-                ea.setEmployeeid(employeeId);
-                ea.setFullname(rs.getString("FullName"));
-                ea.setDepartment(rs.getString("Department"));
-                ea.setManagerid(rs.getInt("ManagerID"));
-                ea.setLeavePeriods(new ArrayList<>()); // Thêm danh sách các khoảng nghỉ
-                employeeMap.put(employeeId, ea);
-                list.add(ea); // Thêm vào danh sách kết quả
+                // Nếu nhân viên đã tồn tại trong map, lấy ra để cập nhật
+                if (employeeMap.containsKey(employeeId)) {
+                    ea = employeeMap.get(employeeId);
+                } else {
+                    // Tạo mới EmployeeAgenda nếu chưa tồn tại
+                    ea = new EmployeeAgenda();
+                    ea.setEmployeeid(employeeId);
+                    ea.setFullname(rs.getString("FullName"));
+                    ea.setDepartment(rs.getString("Department"));
+                    ea.setManagerid(rs.getInt("ManagerID"));
+                    ea.setLeavePeriods(new ArrayList<>()); // Thêm danh sách các khoảng nghỉ
+                    employeeMap.put(employeeId, ea);
+                    list.add(ea); // Thêm vào danh sách kết quả
+                }
+
+                // Thêm khoảng thời gian nghỉ phép nếu có
+                Date startDate = rs.getDate("StartDate");
+                Date endDate = rs.getDate("EndDate");
+                if (startDate != null && endDate != null) {
+                    ea.getLeavePeriods().add(new LeavePeriod(startDate, endDate));
+                }
             }
-
-            // Thêm khoảng thời gian nghỉ phép nếu có
-            Date startDate = rs.getDate("StartDate");
-            Date endDate = rs.getDate("EndDate");
-            if (startDate != null && endDate != null) {
-                ea.getLeavePeriods().add(new LeavePeriod(startDate, endDate));
-            }
+        } catch (SQLException e) {
+            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);
         }
-    } catch (SQLException e) {
-        Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, e);
+        return list;
     }
-    return list;
-}
 
     public boolean update(int id, String reason, Date startdate, Date enddate) {
         String sql = "UPDATE [dbo].[LeaveRequests]\n"
