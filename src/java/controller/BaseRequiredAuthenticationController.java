@@ -1,11 +1,13 @@
 package controller;
 
 import dal.EmployeeDao;
+import dal.FeatureDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import model.Employee;
 import model.User;
 
@@ -31,27 +33,15 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
         String path = requestURI.substring(contextPath.length());
 
         int roleId = user.getRoleid();
+        FeatureDao fd = new FeatureDao();
+        List<String> listFeature = fd.featureList(roleId);
 
-        switch (roleId) {
-            case 1:
-                return path.equals("/reviewrequest")
-                        || path.equals("/agenda");
-
-            case 2:
-                return path.equals("/myrequest")
-                        || path.equals("/reviewrequest")
-                        || path.equals("/create")
-                        || path.equals("/update")
-                        || path.equals("/delete");
-
-            case 3:
-                return path.equals("/myrequest")
-                        || path.equals("/create")
-                        || path.equals("/update")
-                        || path.equals("/delete");
-            default:
-                return false;
+        for (String feature : listFeature) {
+            if (path.equals(feature)) {
+                return true;
+            }
         }
+        return false;
     }
 
     @Override

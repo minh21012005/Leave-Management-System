@@ -30,6 +30,7 @@
         <!-- Header -->
         <header>
             <h1>Leave Management System</h1> 
+            <div class="user-info">Welcome, <c:out value="${sessionScope.user != null ? sessionScope.user.username : 'Guest'}"/></div>
         </header>
 
         <c:set var="user" value="${sessionScope.user}" />

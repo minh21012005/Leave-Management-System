@@ -30,6 +30,12 @@ header {
     left: 0;
     z-index: 1000;
 }
+.user-info {
+    font-size: 0.9rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
 
 /* Sidebar bên trái */
 .sidebar {
