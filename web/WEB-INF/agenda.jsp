@@ -27,6 +27,26 @@
 
         <!-- Main Content -->
         <main>
+            <div class="filter-section">
+                <form action="agenda" method="get">
+                    <div class="filter-group">
+                        <label for="employeeId">Employee ID:</label>
+                        <input type="text" id="employeeId" name="employeeId" value="${requestScope.selectedEmployeeId}">
+                    </div>
+                    <div class="filter-group">
+                        <label for="department">Department:</label>
+                        <select id="department" name="department">
+                            <option value="">All Departments</option>
+                            <c:forEach var="dept" items="${requestScope.departments}">
+                                <option value="${dept}" ${dept eq requestScope.selectionDepartment ? 'selected' : ''}>${dept}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <button type="submit">Filter</button>
+                    <a href="agenda" class="reset-btn">Reset</a>
+                </form>
+            </div>
+
             <section class="employee-list">
                 <c:choose>
                     <c:when test="${not empty list}">
@@ -45,7 +65,7 @@
                                             <tr>
                                                 <c:forEach var="day" items="${weekDays}">
                                                     <th><fmt:formatDate value="${day}" pattern="EEE dd/MM"/></th>
-                                                    </c:forEach>
+                                                </c:forEach>
                                             </tr>
                                         </thead>
                                         <tbody>

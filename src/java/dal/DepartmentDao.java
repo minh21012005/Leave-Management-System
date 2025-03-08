@@ -14,24 +14,23 @@ import java.util.logging.Logger;
  *
  * @author minho
  */
-public class FeatureDao extends DBcontext {
+public class DepartmentDao extends DBcontext {
 
-    public List<String> getFeatureList(int roleid) {
+    public List<String> getDepartment(int employeeid) {
         List<String> list = new ArrayList<>();
-        String sql = "SELECT FeatureName\n"
-                + "FROM Features f\n"
-                + "JOIN RoleFeatures re\n"
-                + "ON f.FeatureID = re.FeatureID \n"
-                + "WHERE re.RoleID = ?";
+        String sql = "select Department\n"
+                + "from Employees\n"
+                + "where EmployeeID != ?\n"
+                + "group by Department";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, roleid);
+            st.setInt(1, employeeid);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                list.add(rs.getString("FeatureName"));
+                list.add(rs.getString("Department"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FeatureDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }

@@ -61,6 +61,84 @@ main {
     flex: 1;
 }
 
+/* Filter Section */
+.filter-section {
+    padding: 30px; /* Increased padding for more space */
+    margin-bottom: 30px; /* More spacing below */
+    background-color: #ffffff; /* White background for cleaner look */
+    border-radius: 10px; /* Slightly larger border radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border: 1px solid #e0e0e0; /* Light border */
+    max-width: 1200px; /* Consistent max-width with employee cards */
+    margin-left: auto;
+    margin-right: auto; /* Center the filter section */
+}
+
+.filter-group {
+    display: inline-flex; /* Better alignment */
+    align-items: center; /* Vertically center items */
+    margin-right: 30px; /* Increased spacing between groups */
+    margin-bottom: 15px; /* More vertical spacing */
+}
+
+.filter-group label {
+    margin-right: 10px; /* More space between label and input */
+    font-weight: 600; /* Slightly bolder text */
+    font-size: 1.1rem; /* Larger font size */
+    color: #2c3e50; /* Match header color */
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 10px 15px; /* Larger padding for bigger inputs */
+    border: 1px solid #ccc; /* Slightly darker border */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 1rem; /* Larger text */
+    width: 200px; /* Fixed width for consistency */
+    background-color: #f9f9f9; /* Light background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none; /* Remove default outline */
+    border-color: #4CAF50; /* Highlight on focus */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); /* Subtle glow */
+}
+
+button {
+    padding: 12px 25px; /* Larger button */
+    background-color: #4CAF50; /* Consistent green */
+    color: white;
+    border: none;
+    border-radius: 6px; /* Match input radius */
+    cursor: pointer;
+    font-size: 1.1rem; /* Larger text */
+    font-weight: 500; /* Medium weight */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.reset-btn {
+    margin-left: 20px; /* More spacing */
+    text-decoration: none;
+    color: #2196F3; /* Blue for reset link */
+    font-size: 1.1rem; /* Larger text */
+    font-weight: 500;
+    padding: 12px 20px; /* Match button padding */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.reset-btn:hover {
+    color: #1976D2; /* Darker blue on hover */
+    text-decoration: underline;
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
 .employee-list {
     display: grid;
     gap: 30px;
@@ -89,7 +167,7 @@ main {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Đường phân cách giữa employee-info và calendar */
+/* Divider between employee-info and calendar */
 .employee-card::before {
     content: '';
     position: absolute;
@@ -128,25 +206,26 @@ main {
 .calendar table {
     margin-top: 20px;
     width: 100%;
-    border-collapse: separate; /* Sử dụng separate để bo góc */
-    border-spacing: 0; /* Loại bỏ khoảng cách giữa các ô */
+    border-collapse: separate; /* Use separate for rounded corners */
+    border-spacing: 0; /* Remove spacing between cells */
     max-width: 900px;
     table-layout: fixed;
-    border-radius: 8px; /* Bo góc cho toàn bộ bảng */
-    overflow: hidden; /* Đảm bảo các góc bo tròn không bị cắt */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Thêm shadow nhẹ cho bảng */
+    border-radius: 8px; /* Rounded corners for the whole table */
+    overflow: hidden; /* Ensure rounded corners aren't clipped */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Light shadow for table */
 }
 
-.calendar th, .calendar td {
-    border: 1px solid #e0e0e0; /* Làm mềm viền bằng màu nhạt hơn */
-    padding: 12px; /* Tăng padding để thoáng hơn */
+.calendar th,
+.calendar td {
+    border: 1px solid #e0e0e0; /* Softer border color */
+    padding: 12px; /* Increased padding for better spacing */
     text-align: center;
     font-size: 1rem;
     height: 50px;
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+    transition: background-color 0.3s ease; /* Smooth color transition */
 }
 
-/* Bo góc cho các ô ở góc */
+/* Rounded corners for corner cells */
 .calendar th:first-child {
     border-top-left-radius: 8px;
 }
@@ -176,19 +255,19 @@ main {
     height: 50px;
 }
 
-/* Làm mềm màu sắc và thêm hiệu ứng hover */
+/* Softer colors and hover effects */
 .work-day {
-    background-color: #34c759; /* Màu xanh lá dịu hơn */
+    background-color: #34c759; /* Softer green */
     color: white;
 }
 
 .off-day {
-    background-color: #ff6b6b; /* Màu đỏ dịu hơn */
+    background-color: #ff6b6b; /* Softer red */
     color: white;
 }
 
 .leave-day {
-    background-color: #ffd700; /* Màu vàng dịu hơn */
+    background-color: #ffd700; /* Softer yellow */
     color: white;
 }
 
@@ -241,7 +320,8 @@ footer {
         margin-top: 140px;
     }
 
-    .calendar th, .calendar td {
+    .calendar th,
+    .calendar td {
         padding: 8px;
         font-size: 1rem;
         min-width: 70px;
@@ -251,5 +331,37 @@ footer {
     .summary {
         margin-top: 1rem;
         text-align: center;
+    }
+
+    /* Responsive Filter Section */
+    .filter-section {
+        padding: 20px; /* Slightly reduced padding */
+    }
+
+    .filter-group {
+        display: flex; /* Stack vertically on small screens */
+        flex-direction: column;
+        align-items: flex-start;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .filter-group label {
+        margin-bottom: 8px; /* Space below label */
+    }
+
+    .filter-group input,
+    .filter-group select {
+        width: 100%; /* Full width on small screens */
+        max-width: 300px; /* Limit max width */
+    }
+
+    button,
+    .reset-btn {
+        width: 100%; /* Full width buttons */
+        max-width: 200px; /* Limit max width */
+        text-align: center;
+        margin-left: 0;
+        margin-top: 10px; /* Spacing between buttons */
     }
 }

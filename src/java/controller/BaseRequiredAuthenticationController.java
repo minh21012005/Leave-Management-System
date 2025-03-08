@@ -34,7 +34,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
 
         int roleId = user.getRoleid();
         FeatureDao fd = new FeatureDao();
-        List<String> listFeature = fd.featureList(roleId);
+        List<String> listFeature = fd.getFeatureList(roleId);
 
         for (String feature : listFeature) {
             if (path.equals(feature)) {
