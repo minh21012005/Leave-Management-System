@@ -4,7 +4,6 @@ import dal.LeaveRequestDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import model.Employee;
@@ -19,9 +18,8 @@ public class ReviewRequestServlet extends BaseRequiredAuthenticationController {
         String newStatus = action.equals("approve") ? "Approved" : "Rejected";
         LeaveRequestDao lrd = new LeaveRequestDao();
         lrd.updateStatusRequest(newStatus, requestId);
-        String notification = "Successful!";
-        HttpSession session = req.getSession();
-        session.setAttribute("notification", notification);
+        String message = "Successful!";
+        req.setAttribute("message", message);
         req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
     }
 

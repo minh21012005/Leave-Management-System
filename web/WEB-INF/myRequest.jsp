@@ -49,7 +49,7 @@
                                         <input type="hidden" name="requestid" value="${request.requestid}">
                                         <button type="submit">Update</button>
                                     </form>
-                                    <form action="delete" onsubmit="return confirmDelete();">
+                                        <form action="delete" method="post" onsubmit="return confirmDelete();">
                                         <input type="hidden" name="requestid" value="${request.requestid}">
                                         <button type="submit">Delete</button>
                                     </form>

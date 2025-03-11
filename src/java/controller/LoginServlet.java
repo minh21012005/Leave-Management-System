@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
         } else {
             String message = "Email or password is incorrect. Please try again!";
-            session.setAttribute("message", message);
+            request.setAttribute("message", message);
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }

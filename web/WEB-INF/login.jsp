@@ -37,11 +37,10 @@
             <p><a href="#">Forgot Username / Password?</a></p>
             <p>Don't have an account? <a href="#">Sign up</a></p>
         </div>
-        <c:if test="${not empty sessionScope.message}">
+        <c:if test="${not empty requestScope.message}">
             <script>
-                alert("${sessionScope.message}");
+                alert("${requestScope.message}");
             </script>
-            <c:remove var="message" scope="session"/>
         </c:if>
     </body>
 </html>

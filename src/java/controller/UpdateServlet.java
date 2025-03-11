@@ -5,7 +5,6 @@ import dal.LeaveRequestDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import model.Employee;
@@ -22,8 +21,7 @@ public class UpdateServlet extends BaseRequiredAuthenticationController{
         LeaveRequestDao lrd = new LeaveRequestDao();
         lrd.update(requestid, reason, startDate, endDate);
         String message = "Successful!";
-        HttpSession session = req.getSession();
-        session.setAttribute("message", message);
+        req.setAttribute("message", message);
         req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
     }
 

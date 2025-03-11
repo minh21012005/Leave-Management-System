@@ -38,38 +38,22 @@
         <div class="container">
             <h2>📑 Manage Leave Requests</h2>
             <div class="menu">
+                <a href="myrequest" class="btn">📄 View My Request</a>
 
-                <c:if test="${not empty user and user.roleid >1}">
-                    <a href="myrequest" class="btn">📄 View My Request</a>
-                </c:if>
+                <a href="create" class="btn">📝 Create Request</a>
 
-                <c:if test="${not empty user and user.roleid > 1}">
-                    <a href="create" class="btn">📝 Create Request</a>
-                </c:if>
+                <a href="reviewrequest" class="btn">✅ Review Request</a>
 
-                <c:if test="${not empty user and user.roleid < 3}">
-                    <a href="reviewrequest" class="btn">✅ Review Request</a>
-                </c:if>
-
-                <c:if test="${not empty user and user.roleid == 1}">
-                    <a href="agenda" class="btn">📊 Agenda</a>
-                </c:if>
+                <a href="agenda" class="btn">📊 Agenda</a>
             </div>
         </div>
         <footer>
             <p>&copy; 2025 My Company. All Rights Reserved.</p>
         </footer>
-        <c:if test="${not empty sessionScope.message}">
+        <c:if test="${not empty requestScope.message}">
             <script>
-                alert("${sessionScope.message}");
+                alert("${requestScope.message}");
             </script>
-            <c:remove var="message" scope="session"/>
-        </c:if>
-        <c:if test="${not empty sessionScope.notification}">
-            <script>
-                alert("${sessionScope.notification}");
-            </script>
-            <c:remove var="notification" scope="session"/>
         </c:if>
     </body>
 </html>

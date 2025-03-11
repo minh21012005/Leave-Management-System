@@ -20,7 +20,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
     private Employee getAuthenticatedEmployee(HttpServletRequest req) {
         User user = getAuthenticatedUser(req);
         EmployeeDao ed = new EmployeeDao();
-        if (user != null && isAuthorized(req, user)) {
+        if (user != null) {
             Employee employee = ed.get(user);
             return employee;
         }
@@ -46,21 +46,31 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = getAuthenticatedUser(req);
         Employee employee = getAuthenticatedEmployee(req);
-        if (employee != null) {
-            doPost(req, resp, employee);
-        } else {
+        if (employee == null) {
             req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
+        }else if(!isAuthorized(req, user)){
+            String message = "You are not authorized to access this function!";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+        }else{
+            doPost(req, resp, employee);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = getAuthenticatedUser(req);
         Employee employee = getAuthenticatedEmployee(req);
-        if (employee != null) {
-            doGet(req, resp, employee);
-        } else {
+        if (employee == null) {
             req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
+        }else if(!isAuthorized(req, user)){
+            String message = "You are not authorized to access this function!";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+        }else{
+            doGet(req, resp, employee);
         }
     }
 
