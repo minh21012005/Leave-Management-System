@@ -6,10 +6,9 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f7fa; /* Light gray-blue background */
+    color: #333333; /* Darker gray for text */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,12 +16,12 @@ body {
 
 /* Header */
 header {
-    background-color: #2c3e50;
-    color: white;
-    padding: 0.5%;
+    background-color: #dfe6e9; /* Light gray with a slight blue tint */
+    color: #2c3e50; /* Dark slate blue for text contrast */
+    padding: 10px;
     text-align: center;
-    position: fixed;
     width: 100%;
+    position: fixed;
     top: 0;
     z-index: 1000;
 }
@@ -31,337 +30,237 @@ header h1 {
     margin-bottom: 0.5rem;
 }
 
-header nav {
-    margin: 0.5rem 0;
-}
-
-header nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 0.5rem;
-}
-
-header nav a:hover {
-    text-decoration: underline;
-}
-
-.weekly-schedule {
-    margin-top: 1rem;
-}
-
 .weekly-schedule h4 {
-    color: white;
-    margin-bottom: 0.5rem;
+    color: #2c3e50; /* Match text color */
+    margin-top: 0.5rem;
 }
 
 /* Main Content */
 main {
-    margin-top: 120px;
+    margin-top: 100px; /* Adjusted for fixed header */
     padding: 20px;
     flex: 1;
 }
 
 /* Filter Section */
 .filter-section {
-    padding: 30px; /* Increased padding for more space */
-    margin-bottom: 30px; /* More spacing below */
-    background-color: #ffffff; /* White background for cleaner look */
-    border-radius: 10px; /* Slightly larger border radius */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border: 1px solid #e0e0e0; /* Light border */
-    max-width: 1200px; /* Consistent max-width with employee cards */
-    margin-left: auto;
-    margin-right: auto; /* Center the filter section */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    max-width: 1000px; /* Reduced for better symmetry with employee card */
+    margin: 0 auto 30px auto;
+}
+
+.filter-section form {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between elements */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .filter-group {
-    display: inline-flex; /* Better alignment */
-    align-items: center; /* Vertically center items */
-    margin-right: 30px; /* Increased spacing between groups */
-    margin-bottom: 15px; /* More vertical spacing */
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .filter-group label {
-    margin-right: 10px; /* More space between label and input */
-    font-weight: 600; /* Slightly bolder text */
-    font-size: 1.1rem; /* Larger font size */
-    color: #2c3e50; /* Match header color */
+    font-weight: 500;
+    color: #2c3e50;
 }
 
 .filter-group input,
 .filter-group select {
-    padding: 10px 15px; /* Larger padding for bigger inputs */
-    border: 1px solid #ccc; /* Slightly darker border */
-    border-radius: 6px; /* Rounded corners */
-    font-size: 1rem; /* Larger text */
-    width: 200px; /* Fixed width for consistency */
-    background-color: #f9f9f9; /* Light background */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    padding: 8px 12px;
+    border: 1px solid #dcdcdc; /* Light gray border */
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+    background-color: #ffffff;
 }
 
 .filter-group input:focus,
 .filter-group select:focus {
-    outline: none; /* Remove default outline */
-    border-color: #4CAF50; /* Highlight on focus */
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); /* Subtle glow */
+    outline: none;
+    border-color: #3498db; /* Blue highlight on focus */
 }
 
 button {
-    padding: 12px 25px; /* Larger button */
-    background-color: #4CAF50; /* Consistent green */
-    color: white;
+    padding: 8px 16px;
+    background-color: #3498db; /* Professional blue */
+    color: #ffffff;
     border: none;
-    border-radius: 6px; /* Match input radius */
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 1.1rem; /* Larger text */
-    font-weight: 500; /* Medium weight */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
 button:hover {
-    background-color: #45a049; /* Darker green on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    background-color: #2980b9; /* Darker blue on hover */
 }
 
 .reset-btn {
-    margin-left: 20px; /* More spacing */
+    padding: 8px 16px;
+    color: #3498db;
     text-decoration: none;
-    color: #2196F3; /* Blue for reset link */
-    font-size: 1.1rem; /* Larger text */
+    font-size: 14px;
     font-weight: 500;
-    padding: 12px 20px; /* Match button padding */
-    transition: color 0.3s ease, transform 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .reset-btn:hover {
-    color: #1976D2; /* Darker blue on hover */
-    text-decoration: underline;
-    transform: translateY(-2px); /* Slight lift effect */
+    color: #2980b9; /* Darker blue on hover */
 }
 
+/* Employee List */
 .employee-list {
     display: grid;
-    gap: 30px;
+    gap: 20px;
 }
 
 .employee-card {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    padding: 25px; /* Increased padding for larger card */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
     display: flex;
-    flex-wrap: nowrap;
     align-items: flex-start;
-    justify-content: flex-start;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    max-width: 1200px;
+    justify-content: space-between;
+    max-width: 1000px; /* Match filter-section width */
     margin: 0 auto;
-    max-height: 500px;
-    overflow: hidden;
-}
-
-.employee-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-/* Divider between employee-info and calendar */
-.employee-card::before {
-    content: '';
-    position: absolute;
-    left: 350px;
-    top: 10%;
-    bottom: 10%;
-    width: 1px;
-    background-color: #e0e0e0;
+    min-height: 200px; /* Ensure a minimum height for better proportion */
 }
 
 .employee-info {
-    width: 300px;
-    min-width: 250px;
-}
-
-.calendar {
-    margin-left: 100px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    width: 350px; /* Increased width for better balance */
+    padding-right: 25px; /* Increased padding */
 }
 
 .employee-info h3 {
     color: #2c3e50;
-    margin-bottom: 1.2rem;
-    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem; /* Slightly larger for emphasis */
 }
 
 .employee-info p {
-    margin: 0.8rem 0;
-    font-size: 1.1rem;
+    margin: 0.6rem 0; /* Adjusted spacing */
+    font-size: 1.1rem; /* Slightly larger text */
 }
 
 /* Calendar */
+.calendar {
+    flex-grow: 1;
+}
+
 .calendar table {
-    margin-top: 20px;
     width: 100%;
-    border-collapse: separate; /* Use separate for rounded corners */
-    border-spacing: 0; /* Remove spacing between cells */
-    max-width: 900px;
-    table-layout: fixed;
-    border-radius: 8px; /* Rounded corners for the whole table */
-    overflow: hidden; /* Ensure rounded corners aren't clipped */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Light shadow for table */
-}
-
-.calendar th,
-.calendar td {
-    border: 1px solid #e0e0e0; /* Softer border color */
-    padding: 12px; /* Increased padding for better spacing */
-    text-align: center;
-    font-size: 1rem;
-    height: 50px;
-    transition: background-color 0.3s ease; /* Smooth color transition */
-}
-
-/* Rounded corners for corner cells */
-.calendar th:first-child {
-    border-top-left-radius: 8px;
-}
-
-.calendar th:last-child {
-    border-top-right-radius: 8px;
-}
-
-.calendar td:first-child {
-    border-bottom-left-radius: 8px;
-}
-
-.calendar td:last-child {
-    border-bottom-right-radius: 8px;
+    border-collapse: collapse;
+    max-width: 650px; /* Adjusted to fit within card */
 }
 
 .calendar th {
-    background-color: #34495e;
-    color: white;
+    background-color: #ecf0f1; /* Light gray for header */
+    color: #34495e; /* Dark slate blue for text */
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 2px solid #dcdcdc; /* Light gray border */
+    border-right: 1px solid #dcdcdc; /* Vertical line between columns */
+}
+
+.calendar th:last-child {
+    border-right: none; /* Remove border on the last column */
 }
 
 .calendar td {
-    padding: 12px;
-    font-size: 1.2rem;
-    font-weight: bold;
+    padding: 10px;
     text-align: center;
-    height: 50px;
+    border-bottom: 1px solid #e0e0e0; /* Very light gray border */
+    border-right: 1px solid #e0e0e0; /* Vertical line between columns */
+    font-size: 14px;
+    font-weight: 500;
 }
 
-/* Softer colors and hover effects */
+.calendar td:last-child {
+    border-right: none; /* Remove border on the last column */
+}
+
 .work-day {
-    background-color: #34c759; /* Softer green */
-    color: white;
+    background-color: #2ecc71; /* Professional green */
+    color: #ffffff;
 }
 
 .off-day {
-    background-color: #ff6b6b; /* Softer red */
-    color: white;
+    background-color: #e74c3c; /* Professional red */
+    color: #ffffff;
 }
 
 .leave-day {
-    background-color: #ffd700; /* Softer yellow */
-    color: white;
+    background-color: #f1c40f; /* Professional yellow */
+    color: #ffffff;
 }
 
 .summary {
-    margin-top: 1.5rem;
-    font-weight: bold;
+    margin-top: 1rem;
+    font-weight: 500;
     color: #2c3e50;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 /* Footer */
 footer {
-    background-color: #2c3e50;
-    color: white;
+    background-color: #dfe6e9; /* Light gray with a slight blue tint */
+    color: #2c3e50; /* Dark slate blue for text contrast */
     text-align: center;
-    padding: 15px;
+    padding: 10px;
     width: 100%;
+    margin-top: auto;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .employee-card {
         flex-direction: column;
-        justify-content: center;
         max-width: 100%;
-        max-height: none;
-        overflow: visible;
-    }
-
-    .employee-card::before {
-        display: none;
     }
 
     .employee-info {
         width: 100%;
-        min-width: 0;
+        padding-right: 0;
+        margin-bottom: 1rem;
     }
 
     .calendar {
-        margin-left: 0;
         width: 100%;
-        align-items: center;
     }
 
     .calendar table {
         max-width: 100%;
     }
 
-    main {
-        margin-top: 140px;
-    }
-
-    .calendar th,
-    .calendar td {
-        padding: 8px;
-        font-size: 1rem;
-        min-width: 70px;
-        height: 40px;
-    }
-
-    .summary {
-        margin-top: 1rem;
-        text-align: center;
-    }
-
-    /* Responsive Filter Section */
-    .filter-section {
-        padding: 20px; /* Slightly reduced padding */
+    .filter-section form {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .filter-group {
-        display: flex; /* Stack vertically on small screens */
+        width: 100%;
         flex-direction: column;
         align-items: flex-start;
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .filter-group label {
-        margin-bottom: 8px; /* Space below label */
     }
 
     .filter-group input,
     .filter-group select {
-        width: 100%; /* Full width on small screens */
-        max-width: 300px; /* Limit max width */
+        width: 100%;
     }
 
     button,
     .reset-btn {
-        width: 100%; /* Full width buttons */
-        max-width: 200px; /* Limit max width */
+        width: 100%;
         text-align: center;
-        margin-left: 0;
-        margin-top: 10px; /* Spacing between buttons */
+        margin-top: 10px;
     }
 }

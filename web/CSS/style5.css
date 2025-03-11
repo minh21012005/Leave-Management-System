@@ -1,10 +1,10 @@
-/* Định dạng tổng thể */
+/* Overall styling */
 body {
-    background-color: #ecf0f1; /* Nền sáng */
-    font-family: Arial, sans-serif;
+    background-color: #f5f7fa; /* Light gray-blue background */
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    color: #2c3e50; /* Chữ tối hơn để nổi bật */
+    color: #333333; /* Darker gray for text */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,109 +13,109 @@ body {
 
 /* Header */
 header {
-    background-color: #2c3e50;
-    color: white;
+    background-color: #dfe6e9; /* Light gray with a slight blue tint */
+    color: #2c3e50; /* Dark slate blue for text contrast */
     width: 100%;
     text-align: center;
-    font-size: 16px;
 }
 
-/* Hộp chứa bảng */
+/* Container for the table */
 .container {
-    width: 80%;
+    width: 85%;
     margin: 20px 0;
     background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
-/* Bảng */
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid #bdc3c7;
 }
 
-/* Định dạng tiêu đề bảng */
+/* Table header */
 thead {
-    background-color: #2c3e50;
-    color: white;
+    background-color: #ecf0f1; /* Light gray for header */
+    color: #34495e; /* Dark slate blue for text */
 }
 
 thead th {
-    padding: 12px;
+    padding: 10px;
     text-align: center;
-    font-size: 16px;
-    border: 1px solid #ffffff;
+    font-size: 14px;
+    border-bottom: 2px solid #dcdcdc; /* Light gray border */
+    border-right: 1px solid #dcdcdc; /* Vertical line between columns */
 }
 
-/* Định dạng ô dữ liệu */
+thead th:last-child {
+    border-right: none; /* Remove border on the last column */
+}
+
+/* Table data */
 tbody td {
     padding: 10px;
     text-align: center;
-    border: 1px solid #bdc3c7;
-    color: #2c3e50;
+    border-bottom: 1px solid #e0e0e0; /* Very light gray border */
+    border-right: 1px solid #e0e0e0; /* Vertical line between columns */
+    color: #333333;
 }
 
-/* Định dạng từng dòng */
+tbody td:last-child {
+    border-right: none; /* Remove border on the last column */
+}
+
+/* Alternating row colors */
 tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: #f9fbfc; /* Very light blue-gray */
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #ffffff;
+    background-color: #ffffff; /* White */
 }
 
-/* Container cho các nút trong ô Status */
+/* Button container in Status column */
 td .button-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 10px; /* Khoảng cách giữa Approve và Reject */
+    gap: 8px; /* Space between buttons */
 }
 
-/* Định dạng chung cho nút */
+/* General button styling */
 .btn {
-    padding: 6px 12px;        /* Kích thước nhỏ gọn, đồng đều với Update/Delete */
-    border: none;             /* Loại bỏ viền */
-    border-radius: 6px;       /* Bo góc mềm mại */
-    color: white;             /* Chữ trắng */
-    cursor: pointer;          /* Con trỏ tay */
-    font-size: 14px;          /* Cỡ chữ đồng đều */
-    font-weight: 600;         /* Chữ hơi đậm */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà cho màu và bóng */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Bóng nhẹ */
-    min-width: 80px;          /* Đảm bảo kích thước tối thiểu */
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease; /* Smooth transition */
 }
 
-/* Nút Approve - Màu xanh lá */
+/* Approve button - Light green */
 .btn-approve {
-    background-color: #4CAF50; /* Màu xanh lá đặc trưng */
+    background-color: #2ecc71; /* Professional green */
 }
 
 .btn-approve:hover {
-    background-color: #45a049; /* Màu xanh đậm hơn khi hover */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Tăng bóng khi hover */
+    background-color: #27ae60; /* Darker green on hover */
 }
 
-/* Nút Reject - Màu đỏ */
+/* Reject button - Light red */
 .btn-reject {
-    background-color: #e74c3c; /* Màu đỏ đặc trưng */
+    background-color: #e74c3c; /* Professional red */
 }
 
 .btn-reject:hover {
-    background-color: #c0392b; /* Màu đỏ đậm hơn khi hover */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Tăng bóng khi hover */
+    background-color: #c0392b; /* Darker red on hover */
 }
 
 /* Footer */
 footer {
-    background-color: #2c3e50;
-    color: white;
+    background-color: #dfe6e9; /* Light gray with a slight blue tint */
+    color: #2c3e50; /* Dark slate blue for text contrast */
     width: 100%;
     text-align: center;
     margin-top: auto;
