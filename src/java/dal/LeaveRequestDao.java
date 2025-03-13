@@ -41,6 +41,37 @@ public class LeaveRequestDao extends DBcontext {
         }
         return list.isEmpty() ? null : list;
     }
+    
+    public ArrayList<LeaveRequest> getMyRequest(Employee employee, int pageindex, int pagesize) {
+        String sql = "SELECT * FROM LeaveRequests WHERE EmployeeID = ?\n"
+                + "order by RequestID\n"
+                + "offset (?-1)*? rows \n"
+                + "fetch next ? rows only";
+        ArrayList<LeaveRequest> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, employee.getEmployeeid());
+            st.setInt(2, pageindex);
+            st.setInt(3, pagesize);
+            st.setInt(4, pagesize);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                LeaveRequest leaveRequest = new LeaveRequest();
+                leaveRequest.setRequestid(rs.getInt("RequestID"));
+                leaveRequest.setEmployeeid(employee.getEmployeeid());
+                leaveRequest.setManagerid(rs.getInt("ManagerID"));
+                leaveRequest.setStartdate(rs.getDate("StartDate"));
+                leaveRequest.setEnddate(rs.getDate("EndDate"));
+                leaveRequest.setReason(rs.getString("Reason"));
+                leaveRequest.setStatus(rs.getString("Status"));
+                leaveRequest.setRequestdate(rs.getDate("RequestDate"));
+                list.add(leaveRequest);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list.isEmpty() ? null : list;
+    }
 
     // Lấy thông tin yêu cầu nghỉ phép theo RequestID
     public LeaveRequest getRequestById(int requestid) {
