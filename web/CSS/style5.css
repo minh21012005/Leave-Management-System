@@ -120,3 +120,32 @@ footer {
     text-align: center;
     margin-top: auto;
 }
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 5px; /* Khoảng cách giữa các nút phân trang */
+}
+
+.page-link {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #34495e; /* Dark slate blue */
+    background-color: #ecf0f1; /* Light gray */
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.2s ease; /* Smooth transition */
+}
+
+.page-link:hover {
+    background-color: #dfe6e9; /* Slightly darker gray on hover */
+}
+
+.page-link.active {
+    background-color: #2ecc71; /* Professional blue for active page */
+    color: #ffffff; /* White text for active page */
+    padding: 8px 12px;
+    border-radius: 4px;
+}

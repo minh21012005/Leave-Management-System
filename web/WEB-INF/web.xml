@@ -29,8 +29,8 @@
         <servlet-class>controller.DeleteServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewMyPagingRequestServlet</servlet-name>
-        <servlet-class>controller.ViewMyPagingRequestServlet</servlet-class>
+        <servlet-name>PagingReviewRequestServlet</servlet-name>
+        <servlet-class>controller.PagingReviewRequestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -61,8 +61,8 @@
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewMyPagingRequestServlet</servlet-name>
-        <url-pattern>/mypagingrequest</url-pattern>
+        <servlet-name>PagingReviewRequestServlet</servlet-name>
+        <url-pattern>/pagingreviewrequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

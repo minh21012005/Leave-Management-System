@@ -41,7 +41,7 @@ public class LeaveRequestDao extends DBcontext {
         }
         return list.isEmpty() ? null : list;
     }
-    
+
     public ArrayList<LeaveRequest> getMyRequest(Employee employee, int pageindex, int pagesize) {
         String sql = "SELECT * FROM LeaveRequests WHERE EmployeeID = ?\n"
                 + "order by RequestID\n"
@@ -144,6 +144,53 @@ public class LeaveRequestDao extends DBcontext {
         return list.isEmpty() ? null : list;
     }
 
+    public ArrayList<LeaveRequest> getOtherRequests(Employee employee, int pageindex, int pagesize) {
+        ArrayList<LeaveRequest> list = new ArrayList<>();
+        try {
+            String sql;
+            PreparedStatement st;
+            if (employee.getEmployeeid() == 1) { // Admin
+                sql = "SELECT * FROM LeaveRequests WHERE Status = ?\n"
+                        + "ORDER BY RequestID\n"
+                        + "OFFSET (?-1)*? ROWS\n"
+                        + "FETCH NEXT ? ROWS ONLY";
+                st = connection.prepareStatement(sql);
+                st.setString(1, "Pending");
+                st.setInt(2, pageindex);
+                st.setInt(3, pagesize);
+                st.setInt(4, pagesize);
+            } else { // Manager
+                sql = "SELECT * FROM LeaveRequests WHERE ManagerID = ? AND Status = ?\n"
+                        + "ORDER BY RequestID\n"
+                        + "OFFSET (?-1)*? ROWS\n"
+                        + "FETCH NEXT ? ROWS ONLY";
+                st = connection.prepareStatement(sql);
+                st.setInt(1, employee.getEmployeeid());
+                st.setString(2, "Pending");
+                st.setInt(3, pageindex);
+                st.setInt(4, pagesize);
+                st.setInt(5, pagesize);
+            }
+
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                LeaveRequest leaveRequest = new LeaveRequest();
+                leaveRequest.setRequestid(rs.getInt("RequestID"));
+                leaveRequest.setEmployeeid(rs.getInt("EmployeeID"));
+                leaveRequest.setManagerid(rs.getInt("ManagerID"));
+                leaveRequest.setStartdate(rs.getDate("StartDate"));
+                leaveRequest.setEnddate(rs.getDate("EndDate"));
+                leaveRequest.setReason(rs.getString("Reason"));
+                leaveRequest.setStatus(rs.getString("Status"));
+                leaveRequest.setRequestdate(rs.getDate("RequestDate"));
+                list.add(leaveRequest);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LeaveRequestDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list.isEmpty() ? null : list;
+    }
+
     // Cập nhật trạng thái yêu cầu nghỉ phép
     public boolean updateStatusRequest(String newStatus, int requestId) {
         String sql = "UPDATE LeaveRequests SET Status = ? WHERE RequestID = ?";
@@ -213,14 +260,14 @@ public class LeaveRequestDao extends DBcontext {
     // Lấy danh sách agenda với lọc theo employeeId và department
     public ArrayList<EmployeeAgenda> getEmployeeAgendaListFiltered(Date weekStart, Date weekEnd, String employeeId, String department) {
         StringBuilder sql = new StringBuilder(
-            "SELECT e.EmployeeID, e.FullName, e.Department, e.ManagerID, "
-            + "le.StartDate, le.EndDate "
-            + "FROM Employees e "
-            + "LEFT JOIN LeaveRequests le "
-            + "ON le.EmployeeID = e.EmployeeID "
-            + "AND le.Status = ? "
-            + "AND (le.StartDate <= ? AND le.EndDate >= ?) "
-            + "WHERE e.EmployeeID != 1 "
+                "SELECT e.EmployeeID, e.FullName, e.Department, e.ManagerID, "
+                + "le.StartDate, le.EndDate "
+                + "FROM Employees e "
+                + "LEFT JOIN LeaveRequests le "
+                + "ON le.EmployeeID = e.EmployeeID "
+                + "AND le.Status = ? "
+                + "AND (le.StartDate <= ? AND le.EndDate >= ?) "
+                + "WHERE e.EmployeeID != 1 "
         );
 
         if (employeeId != null && !employeeId.trim().isEmpty()) {
